@@ -51,8 +51,11 @@ def recommend_system(idCupon,todos):
     todos_dict = [item.dict() for item in todos]
     todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)
 
-    print(todos_json)
+    data=json.loads(todos_json)
 
+    todos_dataframe = pd.DataFrame(data)
+
+    print(todos_dataframe)
     interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
     
     print(interacciones)
@@ -67,7 +70,7 @@ def recommend_system(idCupon,todos):
 
     model.fit(pivote_interacciones_resumido)
 
-    distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[3,:].values.reshape(1,-1),n_neighbors=4)
+    distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(idCupon),:].values.reshape(1,-1),n_neighbors=4)
 
     print(sugerencias)
 

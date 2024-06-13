@@ -59,17 +59,15 @@ def recommend_system(idCupon,todos):
 
     interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
     
-
-
     print(interacciones)
 
-    interraciones_cliente = interacciones['idCliente']==37
+    #interraciones_cliente = interacciones['idCliente']==37
 
-    interacciones_clientes2=interacciones[interraciones_cliente]
+    #interacciones_clientes2=interacciones[interraciones_cliente]
 
-    cupon_favorito = interacciones_clientes2['Interaccion'].idxmax()
-    #opa
-    print(interacciones_clientes2.iloc[cupon_favorito])
+    #cupon_favorito = interacciones_clientes2['Interaccion'].idxmax()
+    
+    #print(interacciones_clientes2.iloc[cupon_favorito])
 
     pivote_interacciones=interacciones.pivot_table(columns="idCliente",index="idCupon",values="Interaccion")
 
@@ -82,9 +80,25 @@ def recommend_system(idCupon,todos):
 
     model.fit(pivote_interacciones_resumido)
 
-    distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(idCupon),:].values.reshape(1,-1),n_neighbors=4)
+    distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(1),:].values.reshape(1,-1),n_neighbors=5)
+
+    print(sugerencias)
+
+    respuesta=pd.DataFrame(columns=['CuponFavorito','CuponRecomendado','Prioridad'])
+    contadorTotal=0
+    prioridad=1
 
 
+    for i in range(1,interacciones['idCupon'].max()):
+        distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[i,:].values.reshape(1,-1),n_neighbors=5)
+        for j in sugerencias[0]:
+            if i!=j:
+                respuesta.loc[contadorTotal]=[i,j,prioridad]
+                contadorTotal+=1
+                prioridad+=1
+        prioridad=1
+
+    print(respuesta)
 
     valor= int(idCupon)
     recommendation_books =recommend_books(valor)

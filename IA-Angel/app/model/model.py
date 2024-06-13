@@ -4,8 +4,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
+from datetime import datetime
 import json
 from sklearn.neighbors import NearestNeighbors
+from pydantic import BaseModel
 #import seaborn as sns
 
 model = pickle.load(open('model/model.pkl','rb'))
@@ -29,16 +31,31 @@ def recommend_books(book_name):
     
     return books
 
+class todosItem(BaseModel):
+    fidCliente: int
+    fidCupon: int
+    numInteracciones: int
+    updatedAt: datetime
+
+
+
+def custom_serializer(obj):
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    raise TypeError(f"Type {type(obj)} not serializable")
+
 
 
 def recommend_system(idCupon,todos):
     
+    todos_dict = [item.dict() for item in todos]
+    todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)
 
-    print(todos)
+    print(todos_json)
 
     interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
     
-
+    print(interacciones)
     pivote_interacciones=interacciones.pivot_table(columns="idCliente",index="idCupon",values="Interaccion")
 
 

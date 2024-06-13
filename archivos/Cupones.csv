@@ -1,0 +1,31 @@
+id,codigo,fidLocatario,fidTipoCupon,sumilla,descripcionCompleta,fechaExpiracion,terminosCondiciones,esLimitado,costoPuntos,cantidadInicial,cantidadDisponible,ordenPriorizacion,rutaFoto,activo,usuarioCreacion,usuarioActualizacion,createdAt,updatedAt
+1,CUP02,5,2,¡Uno gratis! Por la compra de 3 cornDogs,Te damos un corndog de hotdog gratis por la compra de 3 corndogs,2024-05-30 0:00:00,Solo valido para usuarios nuevos,0,300,200,118,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-30 23:05:55
+2,CUP03,1,1,40% de dscto en zapatillas Adidas Originals,Adidas te otorga un 40% de dscto sobre las zaptillas de modelo Originals,2024-05-31 0:00:00,No aplica con modelos nuevos,1,20,66,250,67,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-30 1:54:45
+3,CUP04,2,1,15% en productos logitech,"En la marca Logitech, se otorga un 15% de descuento",2024-07-16 0:00:00,Solo valido para usuarios nuevos,1,100,400,398,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-22 5:15:28
+4,cupon5,2,2,3x2 en productos seleccionados,"En determinadas marcas, si compran 2 llevas 3 productos dentor de Coolbox",2024-07-16 0:00:00,Solo valido para usuarios nuevos,1,100,600,600,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+5,cupon6,1,1,40% de dscto en polos Adidas,Adidas te otroga hasta un 40% de dscto sobre los polos,2024-07-16 0:00:00,Solo valido para usuarios nuevos,1,100,550,550,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+6,cupon9,7,1,20% de dscto en paquete clásico,KFC te otorga un 20% de dscto en paquete clásico de 12 piezas,2024-07-16 0:00:00,Solamente válido desde las 6pm hasta el cierre,1,100,375,375,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+7,cupon10,7,2,2x1 Combo twister tejano,KFC te otorga un segundo twister de tejano de regalo,2024-07-16 0:00:00,Solamente válido desde las 6pm hasta el cierre,1,100,675,675,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+8,cupon11,8,1,50% de dscto en aretes Pandora,Pandora te otorga un 50% de dscto en aretes,2024-07-16 0:00:00,Solamente válido en Plaza San Miguel,1,100,475,475,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+9,cupon12,8,2,2x1 en productos seleccionados,"En determinados productos, si compran 1 llevas 2 productos dentor de Pandora",2024-07-16 0:00:00,Solamente válido en Plaza San Miguel,1,100,505,505,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+10,cupon13,4,1,30% de dscto en todos los libros Crisol,"En determinados libros, Crisol te otorga un 30% de dscto",2024-07-16 0:00:00,Solamente válido en Plaza San Miguel,1,100,305,305,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+11,cupon14,4,2,3x2 en libros Planeta,"En determinados libros, si compran 2 llevas 3 libros dentor de Crisol",2024-07-16 0:00:00,Solamente válido en Plaza San Miguel,1,100,305,303,1,wwww,1,Diego Damian,Diego Damian,2024-05-16 16:16:15,2024-05-16 16:16:15
+12,CP12,5,1,Cupon de descuento para Chung Chun,En cierto productos llevate un 3x2,2024-05-30 0:00:00,valido solo en Plaza San Miguel,1,100,200,178,1,www,1,Diego Mendoza,Diego Mendoza,2024-05-22 0:00:00,2024-05-22 0:00:00
+13,CP13,1,1,Descuentos Variados en Adidas,"Lleva descuentos de multiples productos, entre 30% al 50%",2024-05-30 0:00:00,valido solo en Plaza San Miguel,1,100,200,178,1,www,1,Diego Mendoza,Diego Mendoza,2024-05-22 0:00:00,2024-05-22 0:00:00
+14,CP14,6,2,2X1 en zapatillas One Piece x Puma,Llevate un 2x1 en zapatillas del mismo tipo,2024-05-30 0:00:00,valido solo en Plaza San Miguel,1,100,200,179,1,www,1,Diego Mendoza,Diego Mendoza,2024-05-22 0:00:00,2024-05-22 0:00:00
+15,CP15,3,1,Llevate la Nintendo Switch a un precio especial,Super oferta en Nintendo Switch ultimas unidades,2024-05-30 0:00:00,valido solo en Plaza San Miguel,1,100,200,179,1,www,1,Diego Mendoza,Diego Mendoza,2024-05-22 0:00:00,2024-05-22 0:00:00
+16,CP16,3,2,2x1 en juegos de Playstation,LLeva 2 juegos al precio de 1 de la misma consola,2024-05-30 0:00:00,valido solo en Plaza San Miguel,1,100,200,178,1,www,1,Diego Mendoza,Diego Mendoza,2024-05-22 0:00:00,2024-05-22 0:00:00
+17,CP015,1,1,test,test,2024-05-22 0:00:00,,0,0,0,0,0,CP015,0,NULL,NULL,2024-05-23 1:52:59,2024-05-23 1:52:59
+18,CP016,5,2,prueba,prueba,2024-05-22 0:00:00,prueba,0,2,2,2,2,CP016,0,NULL,NULL,2024-05-23 1:53:52,2024-05-23 1:53:52
+19,CP16,1,1,20% Dscto Polo,20% Dscto Polo,2024-07-19 0:00:00,Solo valido hoy,1,123,120,120,1,CP16,0,NULL,NULL,2024-05-23 3:40:17,2024-05-23 3:40:17
+20,CP20,1,1,20$,20$,2024-05-22 0:00:00,Terminos y Condicones,1,123,120,120,1,CP20,0,NULL,NULL,2024-05-23 3:41:50,2024-05-23 3:41:50
+21,CP23,1,1,20$,20$,2024-05-22 0:00:00,Terminos zzzzzzzzzzzzzzzzzzzzzz,1,12,120,120,1,CP23,0,NULL,NULL,2024-05-23 3:44:46,2024-05-23 3:44:46
+22,,1,1,,20% Dscto,2024-05-15 0:00:00,ZZZZZZZZZZZ,1,0,0,120,0,CP25,0,NULL,NULL,2024-05-23 3:46:11,2024-05-23 18:01:34
+24,fgfgd,2,2,,,2024-05-23 0:00:00,,0,0,0,0,0,fgfgd,0,NULL,NULL,2024-05-23 19:51:15,2024-05-23 19:51:15
+25,4,2,2,fff,ff,2024-05-23 0:00:00,fff,1,4,4,4,4,4,0,NULL,NULL,2024-05-23 21:49:14,2024-05-23 21:49:14
+26,CUP018,2,1,ffff,ff,2024-05-23 0:00:00,fff,1,1,11,11,1,ff,0,NULL,NULL,2024-05-23 22:29:34,2024-05-23 22:35:13
+27,cupon15,1,1,40% de descuento en ropa deportiva de mujer,40% de descuento en ropa deportiva de mujer ,2024-06-20 0:00:00,Solo aplica para tiendas en Plaza San Miguel,0,200,250,0,1,cupon15,0,NULL,NULL,2024-05-23 23:14:54,2024-05-24 1:42:24
+28,cupon35,1,1,40% de descuento en ropa deportiva de mujer,40% de descuento en ropa deportiva de mujer,2024-05-23 0:00:00,Solo válido en tiendas de Plaza San Miguel,1,500,200,200,1,cupon35,0,NULL,NULL,2024-05-24 0:17:04,2024-05-24 1:42:25
+29,CP31,1,2,140% de descuento en ropa deportiva de 1,140% de descuento en ropa deportiva de mujer en Plaza San Miguel1,2024-05-31 0:00:00,1Solo válido en tiendas de Plaza San Miguel1,1,301,201,200,2,CP30,1,NULL,NULL,2024-05-24 1:24:17,2024-05-24 1:40:04
+30,111111,5,1,sadsa,dsadas,2024-05-17 0:00:00,asdasdas,1,0,100,0,1,111111,0,NULL,NULL,2024-05-30 4:57:47,2024-05-30 4:57:47
+31,CUP10,17,2,Sumilla de Ejemplo,Descripción de ejemplo,2024-05-31 10:00:00,Término de ejemplo,1,30,300,300,1,CUP10,1,NULL,NULL,2024-05-31 1:36:07,2024-05-31 1:36:07

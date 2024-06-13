@@ -1,0 +1,13 @@
+CodigoCliente,Nombre,Apellidos,Teléfono,Correo,Género,Puntos
+1,Carlos,Palma Palma,987654321,irving.palma@pucp.edu.pe,NO ESPECIFICO,797
+2,Fernando,Vergara Guzman,942346590,fernando.vergara@pucp.edu.pe,NO ESPECIFICO,300
+3,Irving,Palma Salas,979238212,test@test.com,Masculino,51
+4,Diego,Damian Zelada,951680247,diego.damian@pucp.edu.pe,Masculino,101
+5,Raul,Romero Salas,9282993,Raul@correo.com,Femenino,50
+6,Willy,Rex damian,98292922,Willy@diego.com,Femenino,0
+7,Willy2,Rex2 damian2,982929223,Willy@diego.coms,Femenino,0
+8,Luis,Palma-Perez Solis,987654321,luis@til.com,FEMENINO,0
+9,Hugo,Mendoza Torres,969666669,hugo@uomail.com,Femenino,0
+10,Fer ,Tovar Solis,649464646,Fer@tovar.com,Femenino,0
+11,Andrea,Cri Pe,942346590,andrea@pucp.edu.pe,Femenino,0
+12,Fabian,Vargas Perez,942346590,fabianperez@gmail.com,Masculino,0

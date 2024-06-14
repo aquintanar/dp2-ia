@@ -8,6 +8,13 @@ from datetime import datetime
 import json
 from sklearn.neighbors import NearestNeighbors
 from pydantic import BaseModel
+import requests
+
+url='http://localhost:3000/api/cupones/nuevaRecomendacionGeneral'
+
+
+
+
 #import seaborn as sns
 
 model = pickle.load(open('model/model.pkl','rb'))
@@ -100,8 +107,33 @@ def recommend_system(idCupon,todos):
 
     print(respuesta)
 
+  
+    
+
+    for index,row in  respuesta.iterrows():
+        
+        data={
+            "cuponFavorito":int(row['CuponFavorito']),
+            "cuponRecomendado":int(row['CuponRecomendado']),
+            "prioridad": int(row['Prioridad'])
+        }
+        print(data) 
+        print('=====================================')  
+        try:
+            response = requests.post(url,json=data)
+            if response.status_code == 200:
+                data_response= response.json()
+                print("Respuesta recibida :")
+                print(data_response)
+            else:     
+                print(f"Error al llamar a la API: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print("Error al realizar la solicitud HTTP para índice")
+
+
     valor= int(idCupon)
     recommendation_books =recommend_books(valor)
+    
     return recommendation_books
 
    

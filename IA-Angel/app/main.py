@@ -27,4 +27,5 @@ def home():
 def predict(payload:BodyApi):
     recommendation_books = recommend_system(payload.idCupon,payload.todos)
     recommendation_books.to_list()
-    return {"books":recommendation_books.to_list()}
+    return {"recomendaciones":recommendation_books.to_list()}
+

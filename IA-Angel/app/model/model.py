@@ -51,9 +51,20 @@ def custom_serializer(obj):
         return obj.isoformat()
     raise TypeError(f"Type {type(obj)} not serializable")
 
+def content_based_filtering(todos):
+
+    #Datos que voy a utilizar
+    # 
+    #
+    #
+    #
+    #
 
 
-def recommend_system(idCupon,todos):
+    return 'hola'
+
+
+def collaborative_filtering(todos):
     
     todos_dict = [item.dict() for item in todos]
     todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)

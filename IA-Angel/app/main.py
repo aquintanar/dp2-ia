@@ -1,31 +1,40 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from model.model import recommend_system
+from model.model import collaborative_filtering
+from model.model import content_based_filtering
 from datetime import datetime
 import pandas
 
 app=FastAPI()
 
-class todosItem(BaseModel):
+class interaccionItem(BaseModel):
     fidCliente :int
     fidCupon:int
     numInteracciones:int
     updatedAt:datetime
 
-class BodyApi(BaseModel):
-    idCupon:str
-    todos:list[todosItem]
+class CollaborativeApi(BaseModel):
+    interacciones:list[interaccionItem]
 
+class cupon(BaseModel):
+    id:int
+    codigo:str
+    fidLocatario:int
 
+class ContentApi(BaseModel):
+    cupones:list[cupon]
 
 @app.get("/")
 def home():
     return {"Health_Check":"Ok","model_version":"Not Ok"}
 
 
-@app.post("/predict")
-def predict(payload:BodyApi):
-    recommendation_books = recommend_system(payload.idCupon,payload.todos)
-    recommendation_books.to_list()
-    return {"recomendaciones":recommendation_books.to_list()}
+@app.post("/collaborative_filtering")
+def predict(payload:CollaborativeApi):
+    collaborative_filtering(payload.interacciones)
+    return 'Todo bien'
 
+@app.post("/content_based_filtering")
+def predict(payload:ContentApi):
+    content_based_filtering(payload.todos)
+    return 'Todo bien'

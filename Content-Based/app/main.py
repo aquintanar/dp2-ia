@@ -3,6 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import ast
+import nltk
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 movies = pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/Content-Based/archivos/tmdb_5000_movies.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
 credits = pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/Content-Based/archivos/tmdb_5000_credits.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
@@ -80,3 +84,30 @@ new_df['tags'] = new_df['tags'].apply(lambda x:" ".join(x))
 
 new_df['tags']= new_df['tags'].apply(lambda x:x.lower())
 
+
+ps= PorterStemmer()
+
+def stems(text):
+    l=[]
+    for i in text.split():
+        l.append(ps.stem(i))
+    return " ".join(l)
+
+new_df['tags']=new_df['tags'].apply(stems)
+
+cv = CountVectorizer(max_features=5000,stop_words='english')
+
+vector = cv.fit_transform(new_df['tags']).toarray()
+
+
+
+similary = cosine_similarity(vector)
+
+def recommend(movie):
+    index= new_df[new_df['title']==movie].index[0]
+    distances=sorted(list(enumerate(similary[index])),reverse=True,key=lambda x:x[1])
+    for i in distances[1:6]:
+        print(new_df.iloc[i[0]].title)
+
+
+recommend('The Dark Knight Rises')

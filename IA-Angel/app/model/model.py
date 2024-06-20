@@ -86,7 +86,7 @@ def content_based_filtering(todos):
     todos_dataframe['locatarioNombre'] = todos_dataframe['locatarioNombre'].apply(remove_space)
     todos_dataframe['categoriaTiendaNombre']=todos_dataframe['categoriaTiendaNombre'].str.split(',')
     
-    print(todos_dataframe)
+    
     todos_dataframe['tags'] = todos_dataframe['sumilla']+todos_dataframe['descripcionCompleta']+todos_dataframe['locatarioNombre']+todos_dataframe['categoriaTiendaNombre']
 
     new_df = todos_dataframe[['idCupon','tags']]
@@ -106,12 +106,30 @@ def content_based_filtering(todos):
 
     
     similary = cosine_similarity(vector)
-    print(similary)
+
+
+    print(similary.shape)
     
+    idCuponesPresentes = todos_dataframe['idCupon'].unique()
+    print(idCuponesPresentes)
+    respuesta=pd.DataFrame(columns=['CuponFavorito','CuponRecomendado','Prioridad'])
+    contadorTotal=0
+    prioridad=1
 
-
+    contadorenArreglo=0
+    for i in range(1,todos_dataframe['idCupon'].max()):
+        if i in idCuponesPresentes:
+            print(i)  
+            distancias = sorted(list(enumerate(similary[contadorenArreglo])),reverse=True,key=lambda x:x[1])
+            
+            for j in distancias[1:6]:
+                respuesta.loc[contadorTotal]=[i,j[0],prioridad]
+                contadorTotal+=1
+                prioridad+=1
+            prioridad=1
+            contadorenArreglo+=1
     
-
+    print(respuesta)
     return 'hola'
 
 

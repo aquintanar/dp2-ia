@@ -67,7 +67,7 @@ def content_based_filtering(todos):
 def collaborative_filtering(todos):
     
     todos_dict = [item.dict() for item in todos]
-    
+
     todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)
 
     data=json.loads(todos_json)
@@ -78,13 +78,15 @@ def collaborative_filtering(todos):
     
     todos_dataframe['numInteraccionesEstandarizado']=todos_dataframe.apply(lambda row: row['numInteracciones']*1 if datetime.now()-row['dia']<= timedelta(days=5) else(row['numInteracciones']*0.5 if(datetime.now()-row['dia']<= timedelta(days=10) and datetime.now()-row['dia']> timedelta(days=5)) else 0),axis=1)
 
-    todos_modificado = todos_dataframe.groupby(['fidCliente','fidCupon']).agg(numInteracciones=('numInteraccionesEstandarizado','sum')).reset_index()
+    interacciones = todos_dataframe.groupby(['fidCliente','fidCupon']).agg(numInteracciones=('numInteraccionesEstandarizado','sum')).reset_index()
 
-    print(todos_modificado)
+    
 
+    interacciones=interacciones.rename(columns={'fidCliente':'idCliente'})
+    interacciones=interacciones.rename(columns={'fidCupon':'idCupon'})
+    interacciones=interacciones.rename(columns={'numInteracciones':'Interaccion'})
 
-
-    interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
+    #interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
     
 
     #interraciones_cliente = interacciones['idCliente']==37
@@ -95,8 +97,11 @@ def collaborative_filtering(todos):
     
     #print(interacciones_clientes2.iloc[cupon_favorito])
 
+    
+
     pivote_interacciones=interacciones.pivot_table(columns="idCliente",index="idCupon",values="Interaccion")
 
+    print(pivote_interacciones)
 
     pivote_interacciones.fillna(0,inplace=True)
 
@@ -106,23 +111,27 @@ def collaborative_filtering(todos):
 
     model.fit(pivote_interacciones_resumido)
 
-    distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(1),:].values.reshape(1,-1),n_neighbors=5)
+    #distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(1),:].values.reshape(1,-1),n_neighbors=5)
 
-    print(sugerencias)
+    #print(sugerencias)
 
     respuesta=pd.DataFrame(columns=['CuponFavorito','CuponRecomendado','Prioridad'])
     contadorTotal=0
     prioridad=1
 
+    idCuponesPresentes = interacciones['idCupon'].unique()
+    
 
     for i in range(1,interacciones['idCupon'].max()):
-        distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[i,:].values.reshape(1,-1),n_neighbors=5)
-        for j in sugerencias[0]:
-            if i!=j:
-                respuesta.loc[contadorTotal]=[i,j,prioridad]
-                contadorTotal+=1
-                prioridad+=1
-        prioridad=1
+        if i in idCuponesPresentes:
+            print(i)
+            distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(16),:].values.reshape(1,-1),n_neighbors=4)
+            for j in sugerencias[0]:
+                if i!=j:
+                    respuesta.loc[contadorTotal]=[i,j,prioridad]
+                    contadorTotal+=1
+                    prioridad+=1
+            prioridad=1
 
     print(respuesta)
 
@@ -150,9 +159,5 @@ def collaborative_filtering(todos):
             print("Error al realizar la solicitud HTTP para índice")
 
 
-    valor= int(idCupon)
-    recommendation_books =recommend_books(valor)
-    
-    return recommendation_books
-
+    return 'Todo bien'
    

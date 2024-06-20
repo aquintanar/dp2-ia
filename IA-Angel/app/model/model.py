@@ -85,19 +85,7 @@ def collaborative_filtering(todos):
     interacciones=interacciones.rename(columns={'fidCliente':'idCliente'})
     interacciones=interacciones.rename(columns={'fidCupon':'idCupon'})
     interacciones=interacciones.rename(columns={'numInteracciones':'Interaccion'})
-
-    #interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
-    
-
-    #interraciones_cliente = interacciones['idCliente']==37
-
-    #interacciones_clientes2=interacciones[interraciones_cliente]
-
-    #cupon_favorito = interacciones_clientes2['Interaccion'].idxmax()
-    
-    #print(interacciones_clientes2.iloc[cupon_favorito])
-
-    
+ 
 
     pivote_interacciones=interacciones.pivot_table(columns="idCliente",index="idCupon",values="Interaccion")
 
@@ -110,10 +98,6 @@ def collaborative_filtering(todos):
     model=NearestNeighbors(algorithm='brute')
 
     model.fit(pivote_interacciones_resumido)
-
-    #distancia,sugerencias = model.kneighbors(pivote_interacciones.iloc[int(1),:].values.reshape(1,-1),n_neighbors=5)
-
-    #print(sugerencias)
 
     respuesta=pd.DataFrame(columns=['CuponFavorito','CuponRecomendado','Prioridad'])
     contadorTotal=0
@@ -149,7 +133,7 @@ def collaborative_filtering(todos):
         print('=====================================')  
         try:
             response = requests.post(url,json=data)
-            if response.status_code == 200:
+            if response.status_code == 200 or response.status_code == 201:
                 data_response= response.json()
                 print("Respuesta recibida :")
                 print(data_response)

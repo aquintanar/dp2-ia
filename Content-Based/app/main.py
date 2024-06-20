@@ -99,7 +99,7 @@ cv = CountVectorizer(max_features=5000,stop_words='english')
 
 vector = cv.fit_transform(new_df['tags']).toarray()
 
-
+print(vector)
 
 similary = cosine_similarity(vector)
 

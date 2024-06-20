@@ -9,6 +9,9 @@ import json
 from sklearn.neighbors import NearestNeighbors
 from pydantic import BaseModel
 import requests
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 url='http://localhost:3000/api/cupones/nuevaRecomendacionGeneral'
 
@@ -22,7 +25,7 @@ cupones_id =pickle.load(open('model/cupones_id.pkl','rb'))
 final_rating =pickle.load(open('model/final_rating.pkl','rb'))
 cupon_pivot =pickle.load(open('model/cupon_pivot.pkl','rb'))
 
-
+ps= PorterStemmer()
 
 def recommend_books(book_name):
 
@@ -51,15 +54,63 @@ def custom_serializer(obj):
         return obj.isoformat()
     raise TypeError(f"Type {type(obj)} not serializable")
 
+def remove_space(word):
+    l=[]
+    for i in word:
+        l.append(i.replace(" ",""))
+    return l
+
+def stems(text):
+    l=[]
+    for i in text.split():
+        l.append(ps.stem(i))
+    return " ".join(l)
+
+
 def content_based_filtering(todos):
+    todos_dict = [item.dict() for item in todos]
+    todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)
 
-    #Datos que voy a utilizar
-    # 
-    #
-    #
-    #
-    #
+    data=json.loads(todos_json)
 
+    todos_dataframe = pd.DataFrame(data)
+    
+
+    todos_dataframe['sumilla'] = todos_dataframe['sumilla'].apply(lambda x:x.split())
+    todos_dataframe['descripcionCompleta'] = todos_dataframe['descripcionCompleta'].apply(lambda x:x.split())
+
+   
+
+    todos_dataframe['locatarioNombre'] =todos_dataframe['locatarioNombre'].str.split(',')
+
+    todos_dataframe['locatarioNombre'] = todos_dataframe['locatarioNombre'].apply(remove_space)
+    todos_dataframe['categoriaTiendaNombre']=todos_dataframe['categoriaTiendaNombre'].str.split(',')
+    
+    print(todos_dataframe)
+    todos_dataframe['tags'] = todos_dataframe['sumilla']+todos_dataframe['descripcionCompleta']+todos_dataframe['locatarioNombre']+todos_dataframe['categoriaTiendaNombre']
+
+    new_df = todos_dataframe[['idCupon','tags']]
+
+    new_df['tags'] = new_df['tags'].apply(lambda x:" ".join(x))
+
+    new_df['tags']= new_df['tags'].apply(lambda x:x.lower())
+
+    
+
+
+    new_df['tags']=new_df['tags'].apply(stems)
+
+    cv = CountVectorizer(max_features=5000)
+
+    vector = cv.fit_transform(new_df['tags']).toarray()
+
+    
+    similary = cosine_similarity(vector)
+    print(similary)
+    
+
+
+    
 
     return 'hola'
 

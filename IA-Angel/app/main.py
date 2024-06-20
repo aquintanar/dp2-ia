@@ -18,9 +18,16 @@ class CollaborativeApi(BaseModel):
     todos:list[interaccionItem]
 
 class cuponItem(BaseModel):
-    id:int
-    codigo:str
-    fidLocatario:int
+    idCupon:int
+    sumilla:str
+    descripcionCompleta:str
+    costoPuntos:int
+    esLimitado:bool
+    cantidadDisponible:int
+    idLocatario:int
+    locatarioNombre:str
+    categoriaTiendaID:int
+    categoriaTiendaNombre:str
 
 class ContentApi(BaseModel):
     cupones:list[cuponItem]

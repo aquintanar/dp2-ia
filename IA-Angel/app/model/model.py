@@ -122,7 +122,7 @@ def content_based_filtering(todos):
             print(i)  
             distancias = sorted(list(enumerate(similary[contadorenArreglo])),reverse=True,key=lambda x:x[1])
             
-            for j in distancias[1:6]:
+            for j in distancias[1:5]:
                 respuesta.loc[contadorTotal]=[i,j[0],prioridad]
                 contadorTotal+=1
                 prioridad+=1
@@ -130,6 +130,27 @@ def content_based_filtering(todos):
             contadorenArreglo+=1
     
     print(respuesta)
+
+    for index,row in  respuesta.iterrows():
+        
+        data={
+            "cuponFavorito":int(row['CuponFavorito']),
+            "cuponRecomendado":int(row['CuponRecomendado']),
+            "prioridad": int(row['Prioridad']),
+            "tipoAlgoritmo":2
+        }
+        print(data) 
+        print('=====================================')  
+        try:
+            response = requests.post(url,json=data)
+            if response.status_code == 200 or response.status_code == 201:
+                data_response= response.json()
+                print("Respuesta recibida :")
+                print(data_response)
+            else:     
+                print(f"Error al llamar a la API: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print("Error al realizar la solicitud HTTP para índice")
     return 'hola'
 
 
@@ -196,7 +217,8 @@ def collaborative_filtering(todos):
         data={
             "cuponFavorito":int(row['CuponFavorito']),
             "cuponRecomendado":int(row['CuponRecomendado']),
-            "prioridad": int(row['Prioridad'])
+            "prioridad": int(row['Prioridad']),
+            "tipoAlgoritmo":1
         }
         print(data) 
         print('=====================================')  

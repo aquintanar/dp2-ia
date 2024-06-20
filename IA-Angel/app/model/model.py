@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
-from datetime import datetime
+from datetime import datetime,timedelta
 import json
 from sklearn.neighbors import NearestNeighbors
 from pydantic import BaseModel
@@ -67,17 +67,25 @@ def content_based_filtering(todos):
 def collaborative_filtering(todos):
     
     todos_dict = [item.dict() for item in todos]
+    
     todos_json = json.dumps(todos_dict,default=custom_serializer,indent=4)
 
     data=json.loads(todos_json)
 
     todos_dataframe = pd.DataFrame(data)
 
-    print(todos_dataframe)
+    todos_dataframe['dia']= pd.to_datetime(todos_dataframe['dia'])
+    
+    todos_dataframe['numInteraccionesEstandarizado']=todos_dataframe.apply(lambda row: row['numInteracciones']*1 if datetime.now()-row['dia']<= timedelta(days=5) else(row['numInteracciones']*0.5 if(datetime.now()-row['dia']<= timedelta(days=10) and datetime.now()-row['dia']> timedelta(days=5)) else 0),axis=1)
+
+    todos_modificado = todos_dataframe.groupby(['fidCliente','fidCupon']).agg(numInteracciones=('numInteraccionesEstandarizado','sum')).reset_index()
+
+    print(todos_modificado)
+
+
 
     interacciones=pd.read_csv('D:/Recommender System/Inteligencia_Artificial_Angel/dp2-ia/IA-Angel/archivos/Interacciones.csv',sep=',',encoding='latin-1',on_bad_lines='skip')
     
-    print(interacciones)
 
     #interraciones_cliente = interacciones['idCliente']==37
 

@@ -11,30 +11,31 @@ class interaccionItem(BaseModel):
     fidCliente :int
     fidCupon:int
     numInteracciones:int
-    updatedAt:datetime
+    tipo:str
+    dia:datetime
 
 class CollaborativeApi(BaseModel):
-    interacciones:list[interaccionItem]
+    todos:list[interaccionItem]
 
-class cupon(BaseModel):
+class cuponItem(BaseModel):
     id:int
     codigo:str
     fidLocatario:int
 
 class ContentApi(BaseModel):
-    cupones:list[cupon]
+    cupones:list[cuponItem]
 
 @app.get("/")
-def home():
+def home(): 
     return {"Health_Check":"Ok","model_version":"Not Ok"}
 
 
 @app.post("/collaborative_filtering")
 def predict(payload:CollaborativeApi):
-    collaborative_filtering(payload.interacciones)
+    collaborative_filtering(payload.todos)
     return 'Todo bien'
 
 @app.post("/content_based_filtering")
 def predict(payload:ContentApi):
-    content_based_filtering(payload.todos)
+    content_based_filtering(payload.cupones)
     return 'Todo bien'

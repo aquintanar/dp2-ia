@@ -22,6 +22,4 @@ sed -i "s|http://localhost:3000|$PARAMETER/api|g" IA-Angel/app/model/model.py
 
 cd IA-Angel/app/
 python3 -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+bash -c "source env/bin/activate && pip install -r requirements.txt && uvicorn main:app --reload"
